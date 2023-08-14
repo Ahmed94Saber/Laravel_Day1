@@ -1,7 +1,8 @@
 <?php
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Book;
+use App\Http\Controllers\BookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,28 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/Books', function () {
-    $books = [
-        [
-            "title" => "Java",
-            "price" => 250
-        ],
-        [
-            "title" => "Laravel",
-            "price" => 150
-        ],
-        [
-            "title" => "Php",
-            "price" => 200
-        ]
-    ];
-    $page = "Books";
-    return view('Books',['books' => $books,'page' => $page]);
-});
-Route::get('/dashboard',function(){
-    return view('dashboard');
-});
-Route::get('/create-book',function(){
-    $page = "Create Book";
-    return view('create-book',['page' => $page]);
-});
+Route::get('books', [BookController::class, 'index'])->name("books.index");
+Route::get('books/create',[BookController::class,'create'])->name("books.create");
+Route::post('books',[BookController::class,'store'])->name("books.store");
+Route::delete('books/{book}',[BookController::class,'destroy'])->name("books.destroy");
+Route::get('books/{book}',[BookController::class,'show'])->name("books.show");
+Route::get('books/{book}/edit',[BookController::class,'edit'])->name("books.edit");
+Route::put('books/{book}',[BookController::class,'update'])->name("books.update");

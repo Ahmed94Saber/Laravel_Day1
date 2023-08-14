@@ -38,8 +38,8 @@
             <div class="col-md-3">
                 <ul class="list-group">
                     <li class="list-group-item active">Menu</li>
-                    <li class="list-group-item"><a href="#">Books</a></li>
-                    <li class="list-group-item"><a href="#">Create Book</a></li>
+                    <li class="list-group-item"><a href="{{route('books.index')}}">Books</a></li>
+                    <li class="list-group-item"><a href="{{route('books.create')}}">Create Book</a></li>
                 </ul>
             </div>
 
