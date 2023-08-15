@@ -3,6 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Book;
 use App\Http\Controllers\BookController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,11 +14,12 @@ use App\Http\Controllers\BookController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('',function(){
+    return view('welcome');
+});
+Route::middleware(['auth', 'check-age'])->group(function () {
+    Route::resource('books', BookController::class,);
+});
+Auth::routes();
 
-Route::get('books', [BookController::class, 'index'])->name("books.index");
-Route::get('books/create',[BookController::class,'create'])->name("books.create");
-Route::post('books',[BookController::class,'store'])->name("books.store");
-Route::delete('books/{book}',[BookController::class,'destroy'])->name("books.destroy");
-Route::get('books/{book}',[BookController::class,'show'])->name("books.show");
-Route::get('books/{book}/edit',[BookController::class,'edit'])->name("books.edit");
-Route::put('books/{book}',[BookController::class,'update'])->name("books.update");
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

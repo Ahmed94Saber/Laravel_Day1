@@ -16,7 +16,10 @@
                 <th scope="col"></th>
                 <th scope="col">#</th>
                 <th scope="col">Book title</th>
+                <th scope="col">Image</th>
                 <th scope="col">Price</th>
+                <th scope="col">Category</th>
+                <th scope="col">Tags</th>
                 <th scope="col">Delete</th>
                 <th scope="col">Edit</th>
             </tr>
@@ -27,7 +30,15 @@
                 <th><a href = "{{route('books.show',$book)}}"><button type="button" class="btn btn-primary">View</button></a></th>
                 <th scope="row">{{$book['id']}}</th>
                 <td>{{$book['title']}}</td>
+                <td><img width="60px" height="60px" src="{{ asset('storage/books/') ."/". $book->pic}}" alt=""></td>
                 <td>{{$book['price']}}</td>
+                <td>{{$book->category->name??'-'}}</td>
+                <td>
+                @foreach ($book->tags as $tag)
+                    {{$tag->name??'-'}}
+                    /
+                @endforeach
+                </td>
                 <td>
                     <form action="{{ route('books.destroy', $book['id']) }}" method="POST" class="d-inline">
                     @csrf
