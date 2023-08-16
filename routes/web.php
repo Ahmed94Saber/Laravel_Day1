@@ -20,6 +20,8 @@ Route::get('',function(){
 Route::middleware(['auth', 'check-age'])->group(function () {
     Route::resource('books', BookController::class,);
 });
+// Route::resource('books', BookController::class,);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
